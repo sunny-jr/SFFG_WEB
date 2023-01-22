@@ -1,0 +1,26 @@
+<ul class="mt-20" nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <li *ngFor="let menu of menus" nz-submenu [nzTitle]="menu.title" [nzIcon]="menu.icon">
+        <ul *ngIf="menu.subMenu">
+            <ng-container *ngFor="let sub of menu.subMenu">
+                <li nz-menu-item nzMatchRouter>
+                    <a [routerLink]="sub.link">
+                        <span nz-icon [nzType]="sub.icon" nzTheme="outline"></span>
+                        {{sub.title}}</a>
+                </li>
+            </ng-container>
+        </ul>
+    </li>
+
+    <li nzOpen nzIcon="form">
+        <ul>
+            <li nz-menu-item>
+                <a (click)="onLogout()">
+                    <span nz-icon nzType="logout" nzTheme="outline"></span>
+                    &nbsp;Logout
+                </a>
+            </li>
+        </ul>
+    </li>
+
+
+</ul>

@@ -1,0 +1,30 @@
+<nz-layout class="app-layout">
+    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+        [nzTrigger]="null">
+        <div class="sidebar-logo">
+            <a href="https://ng.ant.design/" target="_blank">
+                <img src="../../assets/logo/logo2.png" alt="logo">
+                <h1>Science For First Graders</h1>
+            </a>
+        </div>
+        <div class="profile">
+            <img src="../../assets/logo/user.png" alt="logo">
+            <h3 [class.d-none]="isCollapsed">{{users.firstName}} {{users.lastName}}</h3>
+        </div>
+        <app-side-menu></app-side-menu>
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <div class="app-header">
+                <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+                    <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+                </span>
+            </div>
+        </nz-header>
+        <nz-content>
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>

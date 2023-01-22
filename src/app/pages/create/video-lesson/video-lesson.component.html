@@ -1,0 +1,38 @@
+<app-create-layout bgLogo="../../../../assets/bg/bg-video2.png">
+    <div content>
+        <nz-card class="app-card mt-20">
+            <div class="form-logo" form-logo>
+                <img alt="example" src="../../../../assets/bg/bg-video.png" />
+            </div>
+
+            <div nz-row class="form">
+                <div nz-col nzSpan="24">
+                    <nz-input-group>
+                        <input type="text" nz-input [(ngModel)]="inputValue" placeholder="Video Title" />
+                    </nz-input-group>
+                </div>
+
+                <div nz-col nzSpan="24">
+                    <textarea rows="4" nz-input [(ngModel)]="inputValue" placeholder="Video Description"></textarea>
+                </div>
+
+                <div nz-col nzSpan="24">
+                    <nz-upload nzType="drag" [nzMultiple]="true"
+                        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" (nzChange)="handleChange($event)">
+                        <p class="ant-upload-drag-icon">
+                            <span nz-icon nzType="inbox"></span>
+                        </p>
+                        <p class="ant-upload-text">Click or drag file to this area to upload lesson</p>
+                        <p class="ant-upload-hint">
+                            Upload files like .pdf extension only
+                        </p>
+                    </nz-upload>
+                </div>
+
+            </div>
+
+            <br />
+            <br />
+        </nz-card>
+    </div>
+</app-create-layout>

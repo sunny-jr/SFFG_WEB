@@ -1,0 +1,41 @@
+<div class="app-login justify-c align-c">
+    <div class="login-card d-flex">
+        <div class="logo">
+            <img src="../../../assets/logo/logo2.png" />
+        </div>
+        <p>Science For First Graders</p>
+        <div class="login-form">
+            <form (ngSubmit)="onLogin()">
+                <nz-input-group>
+                    <input type="text" [(ngModel)]="userID" name="userID" nz-input placeholder="Enter your username" />
+                </nz-input-group>
+
+                <nz-input-group [nzSuffix]="suffixTemplate">
+                    <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password"
+                        [(ngModel)]="password" name="password" />
+                </nz-input-group>
+                <ng-template #suffixTemplate>
+                    <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                        (click)="passwordVisible = !passwordVisible"></span>
+                </ng-template>
+
+                <label class="mt-20" [(ngModel)]="isRememberedEnabled" name="isRemembered" nz-checkbox>Remember
+                    Me</label>
+
+                <button class="mt-20" nz-button nzType="primary" nzSize="large" nzShape="round">
+                    <span nz-icon nzType="enter" nzTheme="outline"></span>
+                    Login
+                </button>
+            </form>
+        </div>
+        <hr>
+        <div class="bottom">
+            <p>Not yet a member
+                <a>
+                    <span nz-icon nzType="delivered-procedure" nzTheme="outline"></span>Register
+                </a>
+            </p>
+        </div>
+
+    </div>
+</div>

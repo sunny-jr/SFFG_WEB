@@ -1,0 +1,30 @@
+.app-create-layout {
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    background-position: left;
+
+    .main-content {
+        display: flex;
+        justify-content: right;
+    }
+
+    ::ng-deep .app-card {
+        max-width: 400px;
+    }
+
+    ::ng-deep .form-logo {
+        margin: auto;
+        max-width: 150px;
+
+        img {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            height: 110px;
+            max-width: 100%
+        }
+    }
+
+    ::ng-deep .form div {
+        padding: 7px 7px;
+    }
+}

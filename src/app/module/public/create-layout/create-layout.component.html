@@ -1,0 +1,9 @@
+<div class="app-create-layout" [ngStyle]="{'background-image' : 'url('+ bgLogo +')'}">
+    <div class="main-content">
+        <ng-content select="[content]"></ng-content>
+    </div>
+
+    <div class="bg-logo">
+        <ng-content select="form-logo"></ng-content>
+    </div>
+</div>

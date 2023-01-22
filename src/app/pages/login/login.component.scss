@@ -1,0 +1,76 @@
+.app-login {
+    display: flex;
+    min-height: 100vh;
+    background-image: url('../../../assets/bg/bg-lg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .login-card {
+        flex-direction: column;
+        background-color: #fff;
+        height: 15cm;
+        border-radius: 2vh;
+        padding: 1cm 2cm;
+        box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
+
+    }
+
+    p {
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .logo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-height: 100px;
+        max-width: 100px;
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.login-form {
+    margin-top: 10px;
+    width: 7cm;
+    margin-left: auto;
+    margin-right: auto;
+
+    nz-input-group {
+        margin-top: 20px;
+        //border-radius: 20px;
+    }
+
+
+    button {
+        position: relative;
+        top: 50px;
+        right: 50px;
+    }
+}
+
+.bottom {
+    margin-top: 55px;
+    margin-left: 10px;
+
+    p {
+        font-size: 14px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    }
+
+    a:hover {
+        color: red;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    span {
+        margin-right: 5px;
+    }
+}
