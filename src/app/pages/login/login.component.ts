@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         const data = JSON.parse(localStorage.getItem(USER_INFO) || '');
 
-
         if (data && data.isRemembered) {
             const { userId, password } = data;
             this.userID = userId;
@@ -78,17 +77,27 @@ export class LoginComponent implements OnInit {
             password: this.password,
         };
 
-        this.http.post('auth', data).subscribe(
-            rs => {
-                if (rs.error) {
-                    callback(rs);
+        this.http.post('auth', data).subscribe({
+            next: (res) => {
+                if (res.error) {
+                    callback(res);
+                    return;
                 }
-                if (rs.access_Token && rs.refresh_Token) {
-                    this.user.setApiToken(ACCESS_TOKEN, rs.access_Token);
-                    this.user.setApiToken(REFRESH_TOKEN, rs.refresh_Token);
+
+                if (res.access_Token && res.refresh_Token) {
+                    this.user.setApiToken(ACCESS_TOKEN, res.access_Token);
+                    this.user.setApiToken(REFRESH_TOKEN, res.refresh_Token);
                     callback(data);
                 }
-                //callback();
-            });
+
+                callback()
+            },
+            error: () => {
+                this.msg.raiseFail()
+
+            }
+        });
+
+
     }
 }
