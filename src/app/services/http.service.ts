@@ -38,6 +38,20 @@ export class HttpService {
             .pipe(map(this.extractResponse), catchError(this.handleError));
     }
 
+
+    upload(url: string, body: any, params?: any): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders()
+                .set('Authorization', `Bearer ${getCookie('access_token')}`),
+            params: params
+        }
+
+        return this.http
+            .post<any>(this.setUrl(url), body, httpOptions)
+            .pipe(map(this.extractResponse), catchError(this.handleError));
+    }
+
+
     private setUrl(url: string): string {
         return String('https://localhost:7047/api/').concat(url);
     }

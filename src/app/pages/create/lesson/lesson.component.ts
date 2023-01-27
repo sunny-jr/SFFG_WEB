@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NzUploadChangeParam, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { HttpService } from 'src/app/services/http.service';
 import { MessageService } from 'src/app/services/message.service';
+import { convertBuffertoBase64 } from 'src/app/util/file';
 
 @Component({
     selector: 'app-lesson',
@@ -14,7 +16,7 @@ export class LessonComponent implements OnInit {
     inputValue: string | null = null;
     textValue: string | null = null;
 
-    constructor(private msg: MessageService) { }
+    constructor(private msg: MessageService, private http: HttpService) { }
 
     ngOnInit(): void {
 
@@ -33,11 +35,36 @@ export class LessonComponent implements OnInit {
         }
     }
 
-    upload = (item: NzUploadXHRArgs): Subscription => {
-        console.log(item);
-        const { file } = item;
+    upload = (item: NzUploadXHRArgs) => {
+        const { file, postFile } = item;
+        const formData: FormData = new FormData();
 
-        return new Subscription()
+        //console.log(postFile);
+        formData.append('LessonName', 'Sample');
+        formData.append('File', postFile as Blob, file.name);
+
+        this.http.upload('lesson?secId=1', formData).subscribe({
+            next: (res) => {
+                console.log(res)
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        })
+
+        return new Observable(obs => {
+            // obs.next(formData);
+
+        }).subscribe({
+            // next: (res: any) => {
+            //     console.log(res);
+            //     // this.http.post('lesson?secId=1', res).subscribe({
+            //     //     next: (res) => {
+            //     //         console.log(res)
+            //     //     }
+            //     // })
+            // }
+        });
     }
 
 

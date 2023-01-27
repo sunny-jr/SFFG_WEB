@@ -17,8 +17,7 @@
                 </div>
 
                 <div nz-col nzSpan="24">
-                    <nz-upload nzType="drag" [nzCustomRequest]="upload" [nzMultiple]="true"
-                        (nzChange)="handleChange($event)">
+                    <nz-upload nzType="drag" [nzCustomRequest]="upload" [nzMultiple]="true" nzAccept=".pdf" (nzChange)="handleChange($event)">
                         <p class="ant-upload-drag-icon">
                             <span nz-icon nzType="inbox"></span>
                         </p>
