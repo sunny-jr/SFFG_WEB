@@ -5,7 +5,7 @@ import {
     HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, empty, map, Observable } from 'rxjs';
 import { getCookie } from '../util/cookie';
 
 @Injectable({
@@ -39,16 +39,35 @@ export class HttpService {
     }
 
 
+    /**
+     * 
+     * @param body : accept form-data only format
+     * @returns 
+     */
     upload(url: string, body: any, params?: any): Observable<any> {
-        const httpOptions = {
-            headers: new HttpHeaders()
-                .set('Authorization', `Bearer ${getCookie('access_token')}`),
-            params: params
+
+        const formData = new FormData();
+
+        if (Object.keys(body).length) {
+
+            for (const [key, value] of Object.entries(body)) {
+                formData.set(key, value as any)
+            }
+
+            const httpOptions = {
+                headers: new HttpHeaders()
+                    .set('Authorization', `Bearer ${getCookie('access_token')}`),
+                //   .set('Content-Type', `multipart/form-data`),
+                params: params
+            }
+
+            return this.http
+                .post<any>(this.setUrl(url), formData, httpOptions)
+                .pipe(map(this.extractResponse), catchError(this.handleError));
         }
 
-        return this.http
-            .post<any>(this.setUrl(url), body, httpOptions)
-            .pipe(map(this.extractResponse), catchError(this.handleError));
+        return new Observable();
+
     }
 
 

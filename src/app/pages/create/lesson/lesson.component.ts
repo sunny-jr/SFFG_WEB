@@ -1,8 +1,10 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NzUploadChangeParam, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
-import { Observable, Subscription } from 'rxjs';
+import { observable, Observable, Subscription } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { MessageService } from 'src/app/services/message.service';
+import { UserService } from 'src/app/services/user.service';
 import { convertBuffertoBase64 } from 'src/app/util/file';
 
 @Component({
@@ -13,10 +15,13 @@ import { convertBuffertoBase64 } from 'src/app/util/file';
 export class LessonComponent implements OnInit {
 
     isStart = false;
-    inputValue: string | null = null;
-    textValue: string | null = null;
+    data = {
+        LessonName: '',
+        description: ''
+    }
+    allowedUpload = true;
 
-    constructor(private msg: MessageService, private http: HttpService) { }
+    constructor(private msg: MessageService, private http: HttpService, private user: UserService) { }
 
     ngOnInit(): void {
 
@@ -35,36 +40,51 @@ export class LessonComponent implements OnInit {
         }
     }
 
+    formChanged(change: any) {
+        if (this.data.LessonName) this.allowedUpload = false;
+        if (!this.data.LessonName) this.allowedUpload = true;
+
+    }
+
     upload = (item: NzUploadXHRArgs) => {
         const { file, postFile } = item;
-        const formData: FormData = new FormData();
+        const { id } = this.user.getSection();
 
-        //console.log(postFile);
-        formData.append('LessonName', 'Sample');
-        formData.append('File', postFile as Blob, file.name);
+        const data = {
+            ...this.data,
+            File: postFile as Blob,
+            SectionId: this.user.getSection().id
+        }
 
-        this.http.upload('lesson?secId=1', formData).subscribe({
-            next: (res) => {
-                console.log(res)
-            },
-            error: (err) => {
-                console.log(err);
-            }
-        })
 
         return new Observable(obs => {
-            // obs.next(formData);
 
-        }).subscribe({
-            // next: (res: any) => {
-            //     console.log(res);
-            //     // this.http.post('lesson?secId=1', res).subscribe({
-            //     //     next: (res) => {
-            //     //         console.log(res)
-            //     //     }
-            //     // })
-            // }
-        });
+            this.http.upload('lesson', data).subscribe({
+                next: (res) => {
+                    switch (res.type) {
+                        case 'success': {
+                            this.msg.raiseSuccess(res.message)
+                            item.onSuccess!({ res, name: file.filename }, item.file, item);
+                            obs.next(true);
+                            break;
+                        }
+
+                        case 'error':
+                            item.onError!({ res, message: res.message }, item.file);
+                            obs.next(false);
+                            this.msg.raiseFail(res.message);
+                            break;
+                    }
+                },
+                error: (err) => {
+                    item.onError!(err, item.file);
+                }
+            })
+
+            item.onError!({}, item.file);
+            obs.error(false);
+
+        }).subscribe();
     }
 
 

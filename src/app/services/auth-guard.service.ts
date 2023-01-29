@@ -48,6 +48,7 @@ export class AuthGuardService implements CanActivate {
         this.http.get('user', { id: userId }).subscribe({
             next: (rs) => {
                 this.user.saveUser(rs);
+                //   console.log(this.user.getUser())
                 this.user.isLoggedIn = true;
                 this.route.navigateByUrl(url);
                 return true;

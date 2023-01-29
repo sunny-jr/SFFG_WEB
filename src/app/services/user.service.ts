@@ -41,6 +41,14 @@ export class UserService {
         return this.user || {};
     }
 
+    getSectionId() {
+        return this.user.sectionId;
+    }
+
+    getSection() {
+        return this.user.section;
+    }
+
     setApiToken(name: string, token: string) {
         setCookie(name, token, COOKIE_DAYS_EXPIRE);
     }
