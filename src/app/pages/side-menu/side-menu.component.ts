@@ -88,14 +88,14 @@ export class SideMenuComponent implements OnInit {
                 {
                     title: 'Manage Lessons',
                     icon: 'eye',
-                    link: '',
+                    link: 'view/lessons',
                     isActive: false,
                     subMenu: [],
                 },
                 {
                     title: 'Manage Video Lessons',
                     icon: 'eye',
-                    link: '',
+                    link: 'view/videos',
                     isActive: false,
                     subMenu: [],
                 },

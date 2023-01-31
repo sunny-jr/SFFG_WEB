@@ -1,0 +1,75 @@
+<div nz-row class="">
+    <div nz-col nzSpan="24">
+        <div class="search p-20">
+            <nz-input-group [nzSuffix]="suffixIconSearch">
+                <input type="text" nz-input placeholder="Search Lesson" [(ngModel)]="search"
+                    (ngModelChange)="onFilter($event)" />
+            </nz-input-group>
+            <ng-template #suffixIconSearch>
+                <span nz-icon nzType="search"></span>
+            </ng-template>
+        </div>
+
+        <br />
+        <br />
+    </div>
+</div>
+
+<div nz-row [nzGutter]="[10,10]" *ngIf="data.length > 0">
+    <ng-container *ngIf="!search">
+        <ng-container *ngFor="let lesson of data">
+            <div nz-col nzSpan="7" class="card-container mt-20">
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionEdit, actionDelete, actionView]">
+                    <nz-card-meta [nzTitle]="lesson.lessonName" nzDescription=" This is the description"
+                        [nzAvatar]="avatarTemplate">
+                    </nz-card-meta>
+                </nz-card>
+                <ng-template #avatarTemplate>
+                    <nz-avatar nzSrc="../../../../assets/bg/bg-lesson2.png"></nz-avatar>
+                </ng-template>
+                <ng-template #coverTemplate>
+                    <img alt="example" src="../../../../assets/bg/bg-lesson.png" />
+                </ng-template>
+                <ng-template #actionEdit>
+                    <span nz-icon nzType="edit" nzTheme="outline"></span>
+                </ng-template>
+                <ng-template #actionDelete>
+                    <span nz-icon nzType="delete" nzTheme="outline"></span>
+                </ng-template>
+                <ng-template #actionView>
+                    <span nz-icon nzType="eye" nzTheme="outline"></span>
+                </ng-template>
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="search">
+        <ng-container *ngFor="let lesson of searchResult">
+            <div nz-col nzSpan="7" class="card-container mt-20">
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionEdit, actionDelete, actionView]">
+                    <nz-card-meta [nzTitle]="lesson.lessonName" nzDescription=" This is the description"
+                        [nzAvatar]="avatarTemplate">
+                    </nz-card-meta>
+                </nz-card>
+                <ng-template #avatarTemplate>
+                    <nz-avatar nzSrc="../../../../assets/bg/bg-lesson2.png"></nz-avatar>
+                </ng-template>
+                <ng-template #coverTemplate>
+                    <img alt="example" src="../../../../assets/bg/bg-lesson.png" />
+                </ng-template>
+                <ng-template #actionEdit>
+                    <span nz-icon nzType="edit" nzTheme="outline"></span>
+                </ng-template>
+                <ng-template #actionDelete>
+                    <span nz-icon nzType="delete" nzTheme="outline"></span>
+                </ng-template>
+                <ng-template #actionView>
+                    <span nz-icon nzType="eye" nzTheme="outline"></span>
+                </ng-template>
+            </div>
+        </ng-container>
+    </ng-container>
+
+
+
+</div>

@@ -81,9 +81,6 @@ export class LessonComponent implements OnInit {
                 }
             })
 
-            item.onError!({}, item.file);
-            obs.error(false);
-
         }).subscribe();
     }
 

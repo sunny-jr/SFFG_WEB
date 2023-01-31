@@ -31,6 +31,14 @@ const routes: Routes = [
                 path: 'create-exercises',
                 loadChildren: () => import('./create/exerises/exerises.module').then((m) => m.ExerisesModule),
             },
+            {
+                path: 'view/lessons',
+                loadChildren: () => import('./view/view-lessons/view-lessons.module').then((m) => m.ViewLessonsModule),
+            },
+            {
+                path: 'view/videos',
+                loadChildren: () => import('./view/view-videos/view-videos.module').then((m) => m.ViewVideosModule),
+            },
         ],
     },
 ];
