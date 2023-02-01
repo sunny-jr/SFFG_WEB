@@ -10,6 +10,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { MessageService } from 'src/app/services/message.service';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { FormsModule } from '@angular/forms';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 const routes: Routes = [
     {
@@ -31,6 +32,7 @@ const routes: Routes = [
         NzInputModule,
         NzIconModule,
         NzAvatarModule,
+        NzPopconfirmModule,
         RouterModule.forChild(routes)
     ],
     providers: [MessageService]

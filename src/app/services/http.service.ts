@@ -34,7 +34,7 @@ export class HttpService {
 
     delete(url: string, params?: any): Observable<any> {
         return this.http
-            .post<any>(this.setUrl(url), this.setOptions(params))
+            .delete<any>(this.setUrl(url), this.setOptions(params))
             .pipe(map(this.extractResponse), catchError(this.handleError));
     }
 

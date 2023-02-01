@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div nz-row [nzGutter]="[10,10]" *ngIf="data.length > 0">
+<div nz-row [nzGutter]="[15,15]" *ngIf="data.length > 0">
     <ng-container *ngIf="!search">
         <ng-container *ngFor="let lesson of data">
             <div nz-col nzSpan="7" class="card-container mt-20">
@@ -34,7 +34,9 @@
                     <span nz-icon nzType="edit" nzTheme="outline"></span>
                 </ng-template>
                 <ng-template #actionDelete>
-                    <span nz-icon nzType="delete" nzTheme="outline"></span>
+                    <span nz-icon nzType="delete" nzTheme="outline" nz-popconfirm
+                        nzPopconfirmTitle="Are you sure delete this lesson?" nzPopconfirmPlacement="bottom"
+                        (nzOnConfirm)="confirm(lesson.id)" (nzOnCancel)="cancel()"></span>
                 </ng-template>
                 <ng-template #actionView>
                     <span nz-icon nzType="eye" nzTheme="outline"></span>
@@ -61,7 +63,9 @@
                     <span nz-icon nzType="edit" nzTheme="outline"></span>
                 </ng-template>
                 <ng-template #actionDelete>
-                    <span nz-icon nzType="delete" nzTheme="outline"></span>
+                    <span nz-icon nzType="delete" nzTheme="outline" nz-popconfirm
+                        nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="bottom"
+                        (nzOnConfirm)="confirm(lesson.id)" (nzOnCancel)="cancel()"></span>
                 </ng-template>
                 <ng-template #actionView>
                     <span nz-icon nzType="eye" nzTheme="outline"></span>

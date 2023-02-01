@@ -37,4 +37,28 @@ export class ViewLessonsComponent implements OnInit {
         this.searchResult = this.data.filter((value: Lesson) => value.lessonName.toLowerCase().includes(text));
     }
 
+    onDeleteLesson(id: number) {
+
+        this.http.delete(`lesson/${id}`).subscribe({
+            next: (res) => {
+                if (res.type === 'success') {
+                    this.msg.raiseSuccess(res.message);
+
+                    return;
+                }
+            },
+            error: (err) => {
+                this.msg.raiseFail(err);
+            }
+        })
+    }
+
+    confirm(id: number) {
+        this.onDeleteLesson(id);
+    }
+
+    cancel() {
+
+    }
+
 }
